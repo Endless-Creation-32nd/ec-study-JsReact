@@ -9,4 +9,4 @@ for (let key in doggy) {
 }
 
 자바
-asdf
+자바 스크립트
