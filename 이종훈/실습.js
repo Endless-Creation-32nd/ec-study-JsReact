@@ -7,3 +7,5 @@ const doggy = {
 for (let key in doggy) {
   console.log(`${key}: ${doggy[key]}`);
 }
+
+자바
