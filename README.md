@@ -19,8 +19,13 @@
 ***
 
 참고자료
-*   [벨로퍼트와 함께하는 모던 자바스크립트](https://learnjs.vlpt.us/)
+*   [벨로퍼트와 함께하는 모던 자바스크립트 강의자료](https://learnjs.vlpt.us/)
+*   [벨로퍼트와 함께하는 모던 자바스크립트 깃허브 레포](https://github.com/velopert/learnjs)
+
+*   [자바스크립트 공식문서(모질라)](https://developer.mozilla.org/ko/docs/Web/JavaScript)
+
 *   [벨로퍼트와 함께하는 모던 리액트](https://react.vlpt.us/)
+*   [리엑트 공식문서](https://ko.reactjs.org/docs/getting-started.html)
 
 ***
 
