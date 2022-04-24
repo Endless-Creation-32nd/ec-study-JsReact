@@ -1,0 +1,35 @@
+// 나의 첫번째 리액트 컴포넌트
+
+Hello.js
+
+import React from 'react';
+
+function Hello() {
+  return <div>안녕하세요</div>
+}
+
+export default Hello;
+
+import React from 'react'; // 이 부분을 통해 리액트를 불러온다
+
+export default Hello; // 반대로 이 부분을 통해 hello 컴포넌트를 내보낸다는 의미이다
+// 컴포넌트란 여러개의 프로그램 함수들을 모아 하나의 특정한 기능을 수행하는 작은 기능적 단위를 의미한다.
+
+App.js
+
+import React from 'react';
+import Hello from './Hello';
+
+function App() {
+  return (
+    <div>
+      <Hello />
+    </div>
+  );
+}
+
+export default App;
+// 이 컴포넌트를 사용하여 app.js 에서 불러와 사용해보았습니다.
+
+//컴포넌트는 일종의 UI 조각, 쉽게 재사용도 가능하다
+
