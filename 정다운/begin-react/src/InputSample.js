@@ -1,40 +1,64 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import UserList from './UserList';
+import CreateUser from './CreateUser';
 
-function InputSample() {
+function App() {
   const [inputs, setInputs] = useState({
-    name: '',
-    nickname: ''
+    username: '',
+    email: ''
   });
-
-  const { name, nickname } = inputs; // 비구조화 할당을 통해 값 추출
-
-  const onChange = (e) => {
-    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+  const { username, email } = inputs;
+  const onChange = e => {
+    const { name, value } = e.target;
     setInputs({
-      ...inputs, // 기존의 input 객체를 복사한 뒤
-      [name]: value // name 키를 가진 값을 value 로 설정
+      ...inputs,
+      [name]: value
     });
   };
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: 'velopert',
+      email: 'public.velopert@gmail.com'
+    },
+    {
+      id: 2,
+      username: 'tester',
+      email: 'tester@example.com'
+    },
+    {
+      id: 3,
+      username: 'liz',
+      email: 'liz@example.com'
+    }
+  ]);
 
-  const onReset = () => {
+  const nextId = useRef(4);
+  const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      username,
+      email
+    };
+    setUsers([...users, user]);
+
     setInputs({
-      name: '',
-      nickname: '',
-    })
+      username: '',
+      email: ''
+    });
+    nextId.current += 1;
   };
-
-
   return (
-    <div>
-      <input name="name" placeholder="이름" onChange={onChange} value={name} />
-      <input name="nickname" placeholder="닉네임" onChange={onChange} value={nickname}/>
-      <button onClick={onReset}>초기화</button>
-      <div>
-        <b>값: </b>
-        {name} ({nickname})
-      </div>
-    </div>
+    <>
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
+      <UserList users={users} />
+    </>
   );
 }
 
-export default InputSample;
+export default App;
