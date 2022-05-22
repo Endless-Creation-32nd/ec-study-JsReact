@@ -1,5 +1,7 @@
 import { React, useState, useRef } from 'react';
 import './App.css';
+import Button from './components/Button';
+import Div from './components/Div';
 import Todo from './Todo';
 
 function App() {
@@ -13,6 +15,9 @@ function App() {
   const inputRef = useRef();
 
   const createTodo = () => {
+    if (inputRef.current.value === '') {
+      return;
+    }
     setTodoList(
       todoList.concat({
         id: parseInt(Math.random(6) * 1000000),
@@ -20,6 +25,7 @@ function App() {
         checked: false,
       })
     );
+
     inputRef.current.value = '';
     inputRef.current.focus();
   };
@@ -36,24 +42,31 @@ function App() {
     setTodoList(todoList.filter((todo) => todo.id !== id));
   };
 
-  const changeChecked = () => {
+  const changeChecked = (id) => {
     setTodoList(
       todoList.map((todo) =>
-        todo.checked === true
-          ? { ...todo, checked: false }
-          : { ...todo, checked: true }
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo
       )
     );
   };
 
   return (
-    <div className='App'>
-      <div className='createTodoForm'>
-        <input type='text' ref={inputRef} autoFocus></input>
-        <button onClick={createTodo}>추가</button>
-      </div>
-
-      <div className='todoList'>
+    <Div className='App'>
+      <h2>투두리스트</h2>
+      <Div className='createTodoForm'>
+        <input
+          type='text'
+          ref={inputRef}
+          autoFocus
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              createTodo();
+            }
+          }}
+        ></input>
+        <Button onClick={createTodo}>추가</Button>
+      </Div>
+      <Div className='todoList'>
         {todoList.map((todo) => (
           <Todo
             key={todo.id}
@@ -65,8 +78,8 @@ function App() {
             changeChecked={changeChecked}
           />
         ))}
-      </div>
-    </div>
+      </Div>
+    </Div>
   );
 }
 

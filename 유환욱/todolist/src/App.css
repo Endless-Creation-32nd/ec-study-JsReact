@@ -27,11 +27,3 @@ input {
   border: 1px solid black;
   margin-top: 10px;
 }
-
-.checked {
-  /*체크 되었을때*/
-}
-
-.unchecked {
-  /*체크 안되었을때*/
-}

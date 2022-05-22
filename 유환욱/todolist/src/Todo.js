@@ -1,4 +1,6 @@
 import { React, useEffect, useState, useRef, memo } from 'react';
+import Button from './components/Button';
+import Div from './components/Div';
 
 const Todo = ({
   id,
@@ -12,6 +14,9 @@ const Todo = ({
   const inputRef = useRef();
 
   const handleUpdateTodo = () => {
+    if (inputRef.current.value === '') {
+      return;
+    }
     updateTodo({ id, content: inputRef.current.value, checked });
     inputRef.current.value = '';
     setEditMode(false);
@@ -22,42 +27,52 @@ const Todo = ({
   });
 
   return (
-    <div className='todo'>
+    <Div className='todo'>
       {editMode ? (
         <>
-          <input type='text' ref={inputRef} autoFocus placeholder={content} />
-          <div>
-            <button onClick={handleUpdateTodo}>완료</button>
-          </div>
+          <input
+            type='text'
+            ref={inputRef}
+            autoFocus
+            placeholder={content}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleUpdateTodo();
+              }
+            }}
+          />
+          <Div>
+            <Button onClick={handleUpdateTodo}>완료</Button>
+          </Div>
         </>
       ) : (
         <>
           {content}
-          <div>
-            <button
+          <Div>
+            <Button
               onClick={() => {
                 setEditMode(true);
               }}
             >
               수정
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => {
                 deleteTodo(id);
               }}
             >
               삭제
-            </button>
+            </Button>
             <input
               type='checkbox'
               onChange={() => {
-                changeChecked();
+                changeChecked(id);
               }}
             ></input>
-          </div>
+          </Div>
         </>
       )}
-    </div>
+    </Div>
   );
 };
 
