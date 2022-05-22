@@ -58,7 +58,6 @@ const todos = [
     done:false
   }
 ];
-
 const index = todos.findIndex(todo => todo.id ===3);
 console.log(index);
 const todo = todos.find(todo => todo.id ===3);
